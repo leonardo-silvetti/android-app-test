@@ -3,9 +3,6 @@ package com.test.leonardo.androidapptest;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.transition.Transition;
-import android.transition.TransitionValues;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +31,7 @@ public class MainFragment extends Fragment {
                 fm.beginTransaction()
                     .setCustomAnimations(R.anim.enter, R.anim.exit)
                     .replace(R.id.fragment_container, scan)
+                    .addToBackStack(null)
                     .commit();
             }
         });
