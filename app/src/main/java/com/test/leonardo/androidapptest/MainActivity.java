@@ -1,29 +1,24 @@
 package com.test.leonardo.androidapptest;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.support.v4.app.FragmentManager;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-
-public class MainActivity extends AppCompatActivity {
-
-    private Button qrCodeButton;
+public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        qrCodeButton = (Button)findViewById(R.id.qrCodeButton);
-        qrCodeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goToScan = new Intent(getApplicationContext(), ScanActivity.class);
-                startActivity(goToScan);
-            }
-        });
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+        if (fragment == null) {
+            fragment = new MainFragment();
+            fm.beginTransaction()
+                    .add(R.id.fragment_container, fragment)
+                    .commit();
+        }
     }
 }
